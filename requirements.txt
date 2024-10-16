@@ -5,5 +5,5 @@ langchain-groq
 validators==0.28.1
 youtube_transcript_api
 streamlit
-pytube
+pytube==15.0.0
 unstructured
