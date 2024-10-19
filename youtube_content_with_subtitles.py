@@ -34,6 +34,3 @@ def transcribe_audio_whisper(audio_path):
 # transcript = transcribe_audio_whisper(audio_path)
 # print(transcript)
 
-print("hello")
-video_url = 'https://youtu.be/6v8djXa-IPQ?si=wc-TX8UAiRLZs51i'
-download_audio(video_url)
