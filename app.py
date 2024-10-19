@@ -4,7 +4,7 @@ from langchain_groq import ChatGroq
 from langchain.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import UnstructuredURLLoader
 from langchain_community.document_loaders import TextLoader
-from youtube_video_with_subtitle import *
+from youtube_content_with_subtitles import *
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 ## sstreamlit APP
 st.set_page_config(page_title="LangChain: Summarize Text From YT or Website", page_icon="🦜")
