@@ -1,9 +1,13 @@
+unstructured
 langchain
 python-dotenv
 langchain-community
 langchain-groq
 validators==0.28.1
-youtube_transcript_api
 streamlit
-pytube==15.0.0
-unstructured
+pytube
+git+https://github.com/openai/whisper.git
+yt-dlp
+torch
+youtube-transcript-api
+ffmpeg
