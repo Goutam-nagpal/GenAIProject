@@ -4,7 +4,7 @@ import os
 import sys
 import yt_dlp
 
-cookies_path  = 'www.youtube.com_cookies.txt'
+
 def download_audio(video_url):
     try:
         # Command to download audio and convert to MP3 using yt-dlp
@@ -12,7 +12,6 @@ def download_audio(video_url):
             sys.executable, '-m', 'yt_dlp', 
             '-f', 'bestaudio', 
             '--extract-audio', '--audio-format', 'mp3', 
-            '--cookies', cookies_path,  # Add cookies to the command
             video_url
         ]
 
