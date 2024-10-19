@@ -1,36 +1,23 @@
-import subprocess
-import whisper
-import os
-import sys
-import yt_dlp
+from youtube_transcript_api import YouTubeTranscriptApi
 
-
-def download_audio(video_url):
-    try:
-        # Command to download audio and convert to MP3 using yt-dlp
-        command = [
-            sys.executable, '-m', 'yt_dlp', 
-            '-f', 'bestaudio', 
-            '--extract-audio', '--audio-format', 'mp3', 
-            video_url
-        ]
-
-        # Run the command
-        subprocess.run(command, check=True)
-        print(f"Audio successfully downloaded from: {video_url}")
-        
-    except subprocess.CalledProcessError as e:
-        print(f"Error occurred: {e}")
-
-def transcribe_audio_whisper(audio_path):
-    # Load Whisper model (base or small moor fasdel fter performance)
-    model = whisper.load_model("base")
+def get_transcript(video_url):
+    # Extract the video ID from the YouTube URL
+    if 'youtu.be' in video_url:
+        video_id = video_url.split('/')[-1]
+    else:
+      video_id = video_url.split("v=")[1]
+    print(video_id)
     
-    result = model.transcribe(audio_path)
+    # Retrieve transcript using the YouTubeTranscriptApi
+    transcript = YouTubeTranscriptApi.get_transcript(video_id)
     
-    return result['text']
+    # Formatting the transcript into a readable form
+    transcript_text = " ".join([item['text'] for item in transcript])
+    
+    return transcript_text
+
+
 # # Example usage
-# audio_path = '/workspaces/GenAIProject/What is Biology？ [6v8djXa-IPQ].mp3'
-# transcript = transcribe_audio_whisper(audio_path)
+# video_url = 'https://youtu.be/6v8djXa-IPQ?si=wc-TX8UAiRLZs51i'
+# transcript = get_transcript(video_url)
 # print(transcript)
-
