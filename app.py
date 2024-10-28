@@ -33,7 +33,7 @@ llm = ChatGroq(model="llama3-8b-8192", groq_api_key=groq_api_key)
 
 # Define Prompt Template
 prompt_template = """
-Provide a summary of the following content in 300 words:
+Analyse the video or audio transcript content and find the below action items.
 Instructions:
 1. Include the category and purpose of the content.
 2. Summarize main points and highlight key discussions.
