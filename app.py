@@ -38,9 +38,7 @@ except Exception as e:
 prompt_template = """
 Analyse the video or audio transcript content and find the below action items.
 Instructions:
-1. Include the category and purpose of the content.
-2. Summarize main points and highlight key discussions.
-3. Conclude with any notable actions or insights.
+Write about all things explained in the video in points. See if you can provide any extra knowledge if the information is incomplete.
 
 Content:{text}
 """
