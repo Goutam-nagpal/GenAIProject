@@ -14,14 +14,28 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Streamlit UI Config
-st.set_page_config(page_title="LangChain Content Summarizer", page_icon="📝")
+st.set_page_config(page_title="Summarize Content from a YouTube URL, Website URL, or Uploaded File", page_icon="📝")
 st.title('Summarize Content from a YouTube URL, Website URL, or Uploaded File')
 
 # Sidebar for API Key
 with st.sidebar:
     groq_api_key = st.text_input("Groq API Key (Optional)", value="", type="password")
     if not groq_api_key:
-        groq_api_key = "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"  
+        groq_api_key = "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"
+
+    # Sidebar for Model Selection
+    st.markdown("Select a Model")
+    model_name = st.selectbox(
+        "Choose the model you want to use:",
+        options=["llama-3.1-70b-versatile",
+                "llama-3.1-8b-instant",
+                "llama3-70b-8192",
+                "llama3-8b-8192"],
+        index=0  # Default selected index
+    )
+
+# Displaying selected model
+st.write(f"Selected Model: {model_name}")
 
 # Input fields
 content_url = st.text_input("Enter YouTube or Website URL")
@@ -29,7 +43,7 @@ uploaded_file = st.file_uploader("Or Upload a Video/Audio File", type=["mp4", "a
 
 # Initialize Language Model with API Key
 try:
-    llm = ChatGroq(model="llama3-8b-8192", groq_api_key=groq_api_key)
+    llm = ChatGroq(model=model_name, groq_api_key=groq_api_key)
 except Exception as e:
     st.error(f"Failed to initialize language model: {e}")
     logger.exception("Error initializing language model.")
