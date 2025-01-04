@@ -6,6 +6,7 @@ headers = {"Authorization": "Bearer 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"}
 def query(filename):
     with open(filename, "rb") as f:
         data = f.read()
+        print(filename)
     response = requests.post(API_URL, headers=headers, data=data)
     print(response)
     return response.json()

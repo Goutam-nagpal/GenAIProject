@@ -15,27 +15,65 @@ logger = logging.getLogger(__name__)
 
 # Streamlit UI Config
 st.set_page_config(page_title="Summarize Content from a YouTube URL, Website URL, or Uploaded File", page_icon="📝")
-st.title('Summarize Content from a YouTube URL, Website URL, or Uploaded File')
+import streamlit as st
+
+# Decorative Header
+st.markdown(
+    """
+    <div style="
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #6c757d;
+        text-align: center;
+    ">
+        <h1 style="
+            font-family: 'Arial, sans-serif'; 
+            font-size: 36px; 
+            color: #343a40;
+            background: linear-gradient(90deg, #007bff, #6f42c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        ">
+            🎥 Summarize Content from a YouTube URL, Website URL, or Uploaded File 🌐
+        </h1>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+import streamlit as st
 
 # Sidebar for API Key
 with st.sidebar:
+    st.markdown(
+        "<h2 style='color: blue;'>API Key Configuration</h2>", 
+        unsafe_allow_html=True
+    )
     groq_api_key = st.text_input("Groq API Key (Optional)", value="", type="password")
     if not groq_api_key:
         groq_api_key = "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"
 
     # Sidebar for Model Selection
-    st.markdown("Select a Model")
+    st.markdown(
+        "<h2 style='color: green;'>Model Selection</h2>", 
+        unsafe_allow_html=True
+    )
     model_name = st.selectbox(
         "Choose the model you want to use:",
-        options=["llama-3.1-70b-versatile",
-                "llama-3.1-8b-instant",
-                "llama3-70b-8192",
-                "llama3-8b-8192"],
+        options=[
+            "llama-3.1-70b-versatile",
+            "llama-3.1-8b-instant",
+            "llama3-70b-8192",
+            "llama3-8b-8192"
+        ],
         index=0  # Default selected index
     )
 
+
 # Displaying selected model
-st.write(f"Selected Model: {model_name}")
+# st.write(f"Selected Model: {model_name}")
 
 # Input fields
 content_url = st.text_input("Enter YouTube or Website URL")
@@ -87,9 +125,9 @@ if st.button("Summarize Content"):
 
                 elif uploaded_file is not None:
                     os.makedirs("uploaded_files", exist_ok=True)
-                    
+                    # st.write( uploaded_file.name.split('.')[-1])
                     # Remove spaces from the file name
-                    sanitized_filename = uploaded_file.name.replace(" ", "_")
+                    sanitized_filename = uploaded_file.name.replace(uploaded_file.name.split('.')[0], "test")
                     try:
                         temp_file_path = os.path.join("uploaded_files", sanitized_filename)
                         with open(temp_file_path, "wb") as f:
